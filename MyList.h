@@ -175,6 +175,7 @@ namespace alan
         template <class Compare> void sort(Compare comp);
         void reverse() noexcept;
     private:
+        void swap_after(iterator pos);
         node<T> before_begin_node;
         static const iterator the_end_iterator;
         static const iterator& the_end()
@@ -182,6 +183,15 @@ namespace alan
             return the_end_iterator;
         }
     };
+
+    template <class T>
+    void forward_list<T>::swap_after(iterator pos)
+    {
+        auto rem = pos.pointer->next;
+        pos.pointer->next = pos.pointer->next.pointer->next;
+        rem.pointer->next = pos.pointer->next.pointer->next;
+        pos.pointer->next.pointer->next = rem;
+    }
 
     template <class T>
     void swap(forward_list<T>& lhs, forward_list<T>& rhs) noexcept
@@ -389,15 +399,68 @@ namespace alan
     {
         auto itr1 = before_begin();
         auto itr2 = x.before_begin();
-        for(; itr1.pointer->next && itr2.pointer->next; ++itr1, ++itr2)
+        while (itr2.pointer->next)
         {
-            if(*(itr2.pointer->next) < *(itr1.pointer->next))
+            if (!(itr1.pointer->next) || *(itr2.pointer->next) < *(itr1.pointer->next))
             {
                 auto rem = itr2.pointer->next.pointer->next;
                 itr2.pointer->next.pointer->next = itr1.pointer->next;
                 itr1.pointer->next = itr2.pointer->next;
                 itr2.pointer->next = rem;
-                ++itr2;
+            }
+            else ++itr1;
+        }
+    }
+
+    template <class T>
+    void forward_list<T>::merge(forward_list<T>&& x)
+    {
+        auto itr1 = before_begin();
+        auto itr2 = x.before_begin();
+        while (itr2.pointer->next)
+        {
+            if (!(itr1.pointer->next) || *(itr2.pointer->next) < *(itr1.pointer->next))
+            {
+                auto rem = itr2.pointer->next.pointer->next;
+                itr2.pointer->next.pointer->next = itr1.pointer->next;
+                itr1.pointer->next = itr2.pointer->next;
+                itr2.pointer->next = rem;
+            }
+            else ++itr1;
+        }
+    }
+
+    template <class T>
+    template <class Compare> void forward_list<T>::merge(forward_list<T>& x, Compare comp)
+    {
+        auto itr1 = before_begin();
+        auto itr2 = x.before_begin();
+        while (itr2.pointer->next)
+        {
+            if (!(itr1.pointer->next) || comp(*(itr2.pointer->next), *(itr1.pointer->next)))
+            {
+                auto rem = itr2.pointer->next.pointer->next;
+                itr2.pointer->next.pointer->next = itr1.pointer->next;
+                itr1.pointer->next = itr2.pointer->next;
+                itr2.pointer->next = rem;
+            }
+            else ++itr1;
+        }
+    }
+
+    template <class T>
+    template <class Compare> void forward_list<T>::merge(forward_list<T>&& x, Compare comp)
+    {
+        auto itr1 = before_begin();
+        auto itr2 = x.before_begin();
+        while (itr2.pointer->next)
+        {
+            if (!(itr1.pointer->next) || comp(*(itr2.pointer->next), *(itr1.pointer->next)))
+            {
+                auto rem = itr2.pointer->next.pointer->next;
+                itr2.pointer->next.pointer->next = itr1.pointer->next;
+                itr1.pointer->next = itr2.pointer->next;
+                itr2.pointer->next = rem;
             }
             else ++itr1;
         }
@@ -406,7 +469,33 @@ namespace alan
     template <class T>
     void forward_list<T>::sort()
     {
-        
+        auto rem = iterator(nullptr);
+        while (!empty() && rem != begin().pointer->next)
+        {
+            auto itr = before_begin();
+            while (itr.pointer->next.pointer->next && itr.pointer->next.pointer->next != rem)
+            {
+                if (*(itr.pointer->next.pointer->next) < *(itr.pointer->next)) swap_after(itr);
+                ++itr;
+            }
+            rem = itr.pointer->next;
+        }
+    }
+
+    template <class T>
+    template <class Compare> void forward_list<T>::sort(Compare comp)
+    {
+        auto rem = iterator(nullptr);
+        while (!empty() && rem != begin().pointer->next)
+        {
+            auto itr = before_begin();
+            while (itr.pointer->next.pointer->next && itr.pointer->next.pointer->next != rem)
+            {
+                if (comp(*(itr.pointer->next.pointer->next), *(itr.pointer->next))) swap_after(itr);
+                ++itr;
+            }
+            rem = itr.pointer->next;
+        }
     }
 
     template <class T>
