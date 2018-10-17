@@ -16,7 +16,7 @@ int main()
         cin >> temp;
         data.push_back(temp);
     }
-    bool exist[10000000];
+    bool exist[100000];
     for (auto v: data)
     {
         if (!exist[v])

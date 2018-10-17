@@ -1,0 +1,1 @@
+rm $(find -executable -name "HW*")
