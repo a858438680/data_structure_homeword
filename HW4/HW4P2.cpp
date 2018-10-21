@@ -23,7 +23,7 @@ int main()
     }
     auto poly1 = convert(input1);
     auto poly2 = convert(input2);
-    auto poly = poly1 + poly2;
+    auto poly = poly1 * poly2;
     for (size_t i = 0; i < poly.size; ++i)
     {
         if (poly.data[i]) std::cout << poly.data[i] << " " << i << std::endl;
