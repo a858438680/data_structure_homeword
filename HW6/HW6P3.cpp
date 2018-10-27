@@ -18,36 +18,36 @@ int main()
             case ')':
                 if (data.empty())
                 {
-                    cout << "no\n" << temp << "?????";
+                    cout << "no\n" << temp << "期待左括号";
                     goto endloop;
                 }
                 else if (top = data.pop(), top != '(')
                 {
-                    cout << "no\n" << top << "?????";
+                    cout << "no\n" << top << "期待右括号";
                     goto endloop;
                 }
                 break;
             case ']':
                 if (data.empty())
                 {
-                    cout << "no\n" << temp << "?????";
+                    cout << "no\n" << temp << "期待左括号";
                     goto endloop;
                 }
                 else if (top = data.pop(), top != '[')
                 {
-                    cout << "no\n" << top << "?????";
+                    cout << "no\n" << top << "期待右括号";
                     goto endloop;
                 }
                 break;
             case '}':
                 if (data.empty())
                 {
-                    cout << "no\n" << temp << "?????";
+                    cout << "no\n" << temp << "期待左括号";
                     goto endloop;
                 }
                 else if (top = data.pop(), top != '{')
                 {
-                    cout << "no\n" << top << "?????";
+                    cout << "no\n" << top << "期待右括号";
                     goto endloop;
                 }
                 break;
@@ -55,7 +55,7 @@ int main()
     }
     if (!data.empty()) 
     {
-        cout << "no\n" << data.pop() << "?????";
+        cout << "no\n" << data.pop() << "期待右括号";
         goto endloop;
     }
     cout << "yes\n";
