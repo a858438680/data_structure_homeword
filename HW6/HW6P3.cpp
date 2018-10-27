@@ -18,36 +18,36 @@ int main()
             case ')':
                 if (data.empty())
                 {
-                    cout << "no\n" << temp << "ÆÚ´ý×óÀ¨ºÅ\n";
+                    cout << "no\n" << temp << "?????";
                     goto endloop;
                 }
                 else if (top = data.pop(), top != '(')
                 {
-                    cout << "no\n" << top << "ÆÚ´ýÓÒÀ¨ºÅ\n";
+                    cout << "no\n" << top << "?????";
                     goto endloop;
                 }
                 break;
             case ']':
                 if (data.empty())
                 {
-                    cout << "no\n" << temp << "ÆÚ´ý×óÀ¨ºÅ\n";
+                    cout << "no\n" << temp << "?????";
                     goto endloop;
                 }
                 else if (top = data.pop(), top != '[')
                 {
-                    cout << "no\n" << top << "ÆÚ´ýÓÒÀ¨ºÅ\n";
+                    cout << "no\n" << top << "?????";
                     goto endloop;
                 }
                 break;
             case '}':
                 if (data.empty())
                 {
-                    cout << "no\n" << temp << "ÆÚ´ý×óÀ¨ºÅ\n";
+                    cout << "no\n" << temp << "?????";
                     goto endloop;
                 }
                 else if (top = data.pop(), top != '{')
                 {
-                    cout << "no\n" << top << "ÆÚ´ýÓÒÀ¨ºÅ\n";
+                    cout << "no\n" << top << "?????";
                     goto endloop;
                 }
                 break;
@@ -55,7 +55,7 @@ int main()
     }
     if (!data.empty()) 
     {
-        cout << "no\n" << data.pop() << "ÆÚ´ýÓÒÀ¨ºÅ\n";
+        cout << "no\n" << data.pop() << "?????";
         goto endloop;
     }
     cout << "yes\n";
