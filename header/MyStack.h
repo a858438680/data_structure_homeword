@@ -6,7 +6,7 @@
 struct stack_full {
     const char *what() { return "Stack is Full\n"; }
 };
- 
+
 struct stack_empty {
     const char *what() { return "Stack is Empty\n"; }
 };
