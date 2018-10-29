@@ -1,3 +1,5 @@
+#ifndef _MY_LIST_H_
+#define _MY_LIST_H_
 #include <limits>
 #include <cstddef>
 #include <utility>
@@ -209,11 +211,11 @@ namespace alan
     template <class T>
     forward_list<T>::forward_list(const forward_list<T>& x) : before_begin_node(nullptr)
     {
-        auto rem = the_end();
-        for (auto first = x.before_begin_node.next; first != the_end(); ++first)
+        auto rem = end();
+        for (auto first = x.before_begin_node.next; first != end(); ++first)
         {
             auto itr = new node<T>(*first, nullptr);
-            if (rem != the_end())
+            if (rem != end())
             {
                 rem.pointer->next = itr;
                 rem = itr;
@@ -235,7 +237,7 @@ namespace alan
     template <class T>
     forward_list<T>::~forward_list()
     {
-        while (before_begin_node.next != the_end())
+        while (before_begin_node.next != end())
             delete (before_begin_node.next++).pointer;
     }
 
@@ -363,7 +365,7 @@ namespace alan
     template <class T>
     bool forward_list<T>::empty() const noexcept
     {
-        return before_begin_node.next == the_end();
+        return before_begin_node.next == end();
     }
 
     template <class T>
@@ -517,3 +519,4 @@ namespace alan
         }
     }
 }
+#endif

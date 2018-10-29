@@ -1,3 +1,5 @@
+#ifndef _MY_VEC_H_
+#define _MY_VEC_H_
 #include <initializer_list>
 #include <limits>
 #include <utility>
@@ -400,3 +402,4 @@ namespace alan{
         return first;
     }
 }
+#endif

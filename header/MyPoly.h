@@ -1,3 +1,5 @@
+#ifndef _MY_POLY_H
+#define _MY_POLY_H
 #include "MyVec.h"
 #include <algorithm>
 
@@ -64,3 +66,4 @@ poly convert(const alan::vector<pair>& input)
     }
     else return poly{alan::vector<int>(), 0};
 }
+#endif
