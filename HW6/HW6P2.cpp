@@ -18,8 +18,12 @@ std::ostream& operator<<(std::ostream& os, general_number n)
 
 int pow(int num, int exp)
 {
-    if (exp == 1) return num;
-    else return num * pow(num, exp - 1);
+    auto ret = 1;
+    for (int i = 0; i < exp; i++)
+    {
+        ret *= num;
+    }
+    return ret;
 }
 
 int tonum(char c)

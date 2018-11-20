@@ -1,1 +1,1 @@
-rm $(find -executable -name "HW*")
+find ./ -name "HW*" -type f -executable -exec rm -rf {} \;
