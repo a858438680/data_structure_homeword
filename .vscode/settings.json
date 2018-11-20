@@ -42,6 +42,10 @@
         "typeinfo": "cpp",
         "utility": "cpp",
         "algorithm": "cpp",
-        "forward_list": "cpp"
+        "forward_list": "cpp",
+        "cstring": "cpp",
+        "functional": "cpp",
+        "iomanip": "cpp",
+        "variant": "cpp"
     }
 }
