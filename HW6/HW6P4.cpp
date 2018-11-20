@@ -44,8 +44,15 @@ void calc(alan::stack<char>& ins, alan::stack<int>& num)
     {
         op = ins.pop();
         j = num.pop();
-        i = num.pop();
-        num.push(binops[op](i, j));
+        if (op == '-' && num.empty())
+        {
+            num.push(binops[op](0, j));
+        }
+        else
+        {
+            i = num.pop();
+            num.push(binops[op](i, j));
+        }
     }
 }
 

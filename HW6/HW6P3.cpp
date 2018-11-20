@@ -16,7 +16,7 @@ int main()
                 data.push(temp);
                 break;
             case ')':
-                if (data.empty())
+                if (data.empty())                                     
                 {
                     cout << "no\n" << temp << "期待左括号";
                     goto endloop;
