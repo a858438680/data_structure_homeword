@@ -9,6 +9,7 @@ namespace alan
 	struct node
 	{
 		T value;
+		int weight;
 		node<T>* left;
 		node<T>* right;
 	};
@@ -23,6 +24,8 @@ namespace alan
 		virtual ~tree_base() { clear(); }
 		node<T>* push_left(const T& x, node<T> *pos);
 		node<T>* push_right(const T& x, node<T> *pos);
+		node<T>* insert_left(tree_base& t, node<T> *pos);
+		node<T>* insert_right(tree_base& t, node<T> *pos);
 		template <class Oper> void preorder_traverse(Oper op);
 		template <class Oper> void inorder_traverse(Oper op);
 		template <class Oper> void postorder_traverse(Oper op);
@@ -45,6 +48,40 @@ namespace alan
 		void clear(node<T>* t);
 		node<T> *tree;
 	};
+
+	template <class T>
+	node<T>* tree_base<T>::insert_left(tree_base<T> &t, node<T> *pos)
+	{
+		if (pos)
+		{
+			pos->left = t.root();
+			t.tree = nullptr;
+			return pos->left;
+		}
+		else
+		{
+			tree = t.tree;
+			t.tree = nullptr;
+			return tree;
+		}
+	}
+
+	template <class T>
+	node<T>* tree_base<T>::insert_right(tree_base<T> &t, node<T> *pos)
+	{
+		if (pos)
+		{
+			pos->right = t.root();
+			t.tree = nullptr;
+			return pos->right;
+		}
+		else
+		{
+			tree = t.tree;
+			t.tree = nullptr;
+			return tree;
+		}
+	}
 
     template <class T>
     void tree_base<T>::reverse()
