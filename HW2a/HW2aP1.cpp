@@ -1,24 +1,26 @@
-#include <list>
-#include <utility>
-#include <algorithm>
-#include "../header/MyTree.h"
+#include <iostream>
+#include <queue>
 using namespace std;
 
 int main()
 {
+    using node = pair<int, int>;
+    auto cmp = [](const node& lhs, const node& rhs){ return lhs.first > rhs.first; };
+    priority_queue<node, std::vector<node>, decltype(cmp)> data(cmp);
     int n, temp;
-    list<pair<alan::tree_base<int>, int>> forest;
     cin >> n;
     for (int i = 0; i < n; ++i)
     {
         cin >> temp;
-        alan::tree_base<int> t;
-        t.push_left(temp, t.root());
-        forest.push_back(pair<alan::tree_base<int>, int>(t, i));
+        data.push(make_pair(temp, 0));
     }
-    if (n < 2);
-    else
+    while(data.size() > 1)
     {
-        auto 
+        auto first = data.top();
+        data.pop();
+        auto second = data.top();
+        data.pop();
+        data.push(make_pair(first.first + second.first, first.first+first.second+second.first+second.second));
     }
+    std::cout << data.top().second << std::endl;
 }

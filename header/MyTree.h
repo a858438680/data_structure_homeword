@@ -9,7 +9,6 @@ namespace alan
 	struct node
 	{
 		T value;
-		int weight;
 		node<T>* left;
 		node<T>* right;
 	};
